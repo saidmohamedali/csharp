@@ -31,12 +31,16 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <pre><code># Generics
-</code></pre>
+        <p>Every one can be a C# developer but being a good developer meant to constantly review some key topics.
+This page is not <strong>tutorial for c#</strong>, it is more like "<strong>did you know that...?</strong>".
+Topics are not exhaustive but they are essential and organized like a check-list.</p>
+
+<h1>
+<a name="generics" class="anchor" href="#generics"><span class="octicon octicon-link"></span></a>Generics</h1>
 
 <p>Generics provide type safety without the overhead of multiple implementations, but there are few thinks to keep in mind while using them.</p>
 
-<p>Scenario</p>
+<p>Scenario:<em><strong>Why does this code not compile?</strong></em></p>
 
 <div class="highlight highlight-csharp"><pre><span class="k">public</span> <span class="k">class</span> <span class="nc">Generic</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span>
 <span class="p">{</span>
@@ -48,51 +52,120 @@
 <span class="p">}</span>
 </pre></div>
 
-<p>Why does this code not compile?
-The answer is the  + operator is not defined for T.
-For further information, please visit: <a href="http://msdn.microsoft.com/en-us/library/c6cyy67b%28v=vs.90%29.aspx">Generics</a></p>
+<p><em><strong>The answer is:</strong></em> the ** + operator** is not defined for T.
+For further information, please visit: <a href="http://msdn.microsoft.com/en-us/library/c6cyy67b%28v=vs.90%29.aspx">Generics</a>.</p>
 
-<pre><code>    ## Constraints
-    ## Generic Collections
-    ## Variance
+<h2>
+<a name="constraints" class="anchor" href="#constraints"><span class="octicon octicon-link"></span></a>Constraints</h2>
 
-# Expressions
-    ## Operators
-    ## Query Expressions
+<p>Scenario:<em><strong>Why does this code not compile?</strong></em></p>
 
-# Arrays and Collections
-    ## Array and Collection Usage
+<div class="highlight highlight-csharp"><pre> <span class="k">class</span> <span class="nc">CustomFactory</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> 
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="n">T</span> <span class="nf">CreateItem</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">T</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
 
-# Class Members
-    ## Readonly and Constant Fields
-    ## Modifiers
-    ## Static/Instance Members
-    ## Properties and Indexers
-    ## Methods
+<p><em><strong>The answer is</strong></em> : the CreateItem Methode tries to  instantiate a new object of type T and the compile does not now if there is a parameter-less constructor of type T so to make it work we need add <strong>new</strong> constraint to this generic class.
+for more information please go to:</p>
 
-# Reference and Value Types
-   ## Classes and Structs
-    ## Primitive Datatypes
-    ## Boxing and Unboxing
+<ul>
+<li><a href="http://msdn.microsoft.com/en-us/library/sd2w2ew5.aspx">New constraint</a></li>
+</ul><h2>
+<a name="generic-collections" class="anchor" href="#generic-collections"><span class="octicon octicon-link"></span></a>Generic Collections</h2>
 
-# Resources and COM
-    ## Unmanaged Resources
-    ## Platform Invoke (P/Invoke)
+<h2>
+<a name="variance" class="anchor" href="#variance"><span class="octicon octicon-link"></span></a>Variance</h2>
 
-# Flow of control
-    ## Jump Statements
-    ## Selection Statements
-    ## Iteration Statements
+<h1>
+<a name="expressions" class="anchor" href="#expressions"><span class="octicon octicon-link"></span></a>Expressions</h1>
 
-# Delegates and Events
-    ## Event Creation and Usage
-    ## Asynchronous Processing
-    ## Action and Func
+<h2>
+<a name="operators" class="anchor" href="#operators"><span class="octicon octicon-link"></span></a>Operators</h2>
 
-# Exceptions
-    ## Exception Handling
-    ## Rethrowing Exceptions
-</code></pre>
+<h2>
+<a name="query-expressions" class="anchor" href="#query-expressions"><span class="octicon octicon-link"></span></a>Query Expressions</h2>
+
+<h1>
+<a name="arrays-and-collections" class="anchor" href="#arrays-and-collections"><span class="octicon octicon-link"></span></a>Arrays and Collections</h1>
+
+<h2>
+<a name="array-and-collection-usage" class="anchor" href="#array-and-collection-usage"><span class="octicon octicon-link"></span></a>Array and Collection Usage</h2>
+
+<h1>
+<a name="class-members" class="anchor" href="#class-members"><span class="octicon octicon-link"></span></a>Class Members</h1>
+
+<h2>
+<a name="readonly-and-constant-fields" class="anchor" href="#readonly-and-constant-fields"><span class="octicon octicon-link"></span></a>Readonly and Constant Fields</h2>
+
+<h2>
+<a name="modifiers" class="anchor" href="#modifiers"><span class="octicon octicon-link"></span></a>Modifiers</h2>
+
+<h2>
+<a name="staticinstance-members" class="anchor" href="#staticinstance-members"><span class="octicon octicon-link"></span></a>Static/Instance Members</h2>
+
+<h2>
+<a name="properties-and-indexers" class="anchor" href="#properties-and-indexers"><span class="octicon octicon-link"></span></a>Properties and Indexers</h2>
+
+<h2>
+<a name="methods" class="anchor" href="#methods"><span class="octicon octicon-link"></span></a>Methods</h2>
+
+<h1>
+<a name="reference-and-value-types" class="anchor" href="#reference-and-value-types"><span class="octicon octicon-link"></span></a>Reference and Value Types</h1>
+
+<h2>
+<a name="classes-and-structs" class="anchor" href="#classes-and-structs"><span class="octicon octicon-link"></span></a>Classes and Structs</h2>
+
+<h2>
+<a name="primitive-datatypes" class="anchor" href="#primitive-datatypes"><span class="octicon octicon-link"></span></a>Primitive Datatypes</h2>
+
+<h2>
+<a name="boxing-and-unboxing" class="anchor" href="#boxing-and-unboxing"><span class="octicon octicon-link"></span></a>Boxing and Unboxing</h2>
+
+<h1>
+<a name="resources-and-com" class="anchor" href="#resources-and-com"><span class="octicon octicon-link"></span></a>Resources and COM</h1>
+
+<h2>
+<a name="unmanaged-resources" class="anchor" href="#unmanaged-resources"><span class="octicon octicon-link"></span></a>Unmanaged Resources</h2>
+
+<h2>
+<a name="platform-invoke-pinvoke" class="anchor" href="#platform-invoke-pinvoke"><span class="octicon octicon-link"></span></a>Platform Invoke (P/Invoke)</h2>
+
+<h1>
+<a name="flow-of-control" class="anchor" href="#flow-of-control"><span class="octicon octicon-link"></span></a>Flow of control</h1>
+
+<h2>
+<a name="jump-statements" class="anchor" href="#jump-statements"><span class="octicon octicon-link"></span></a>Jump Statements</h2>
+
+<h2>
+<a name="selection-statements" class="anchor" href="#selection-statements"><span class="octicon octicon-link"></span></a>Selection Statements</h2>
+
+<h2>
+<a name="iteration-statements" class="anchor" href="#iteration-statements"><span class="octicon octicon-link"></span></a>Iteration Statements</h2>
+
+<h1>
+<a name="delegates-and-events" class="anchor" href="#delegates-and-events"><span class="octicon octicon-link"></span></a>Delegates and Events</h1>
+
+<h2>
+<a name="event-creation-and-usage" class="anchor" href="#event-creation-and-usage"><span class="octicon octicon-link"></span></a>Event Creation and Usage</h2>
+
+<h2>
+<a name="asynchronous-processing" class="anchor" href="#asynchronous-processing"><span class="octicon octicon-link"></span></a>Asynchronous Processing</h2>
+
+<h2>
+<a name="action-and-func" class="anchor" href="#action-and-func"><span class="octicon octicon-link"></span></a>Action and Func</h2>
+
+<h1>
+<a name="exceptions" class="anchor" href="#exceptions"><span class="octicon octicon-link"></span></a>Exceptions</h1>
+
+<h2>
+<a name="exception-handling" class="anchor" href="#exception-handling"><span class="octicon octicon-link"></span></a>Exception Handling</h2>
+
+<h2>
+<a name="rethrowing-exceptions" class="anchor" href="#rethrowing-exceptions"><span class="octicon octicon-link"></span></a>Rethrowing Exceptions</h2>
       </section>
     </div>
 
