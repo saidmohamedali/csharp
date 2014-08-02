@@ -58,7 +58,7 @@ For further information, please visit: <a href="http://msdn.microsoft.com/en-us/
 <h2>
 <a name="constraints" class="anchor" href="#constraints"><span class="octicon octicon-link"></span></a>Constraints</h2>
 
-<p>Scenario:<em><strong>Why does this code not compile?</strong></em></p>
+<p>Scenario1:<em><strong>Why does this code not compile?</strong></em></p>
 
 <div class="highlight highlight-csharp"><pre> <span class="k">class</span> <span class="nc">CustomFactory</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> 
     <span class="p">{</span>
@@ -74,6 +74,27 @@ for more information please go to:</p>
 
 <ul>
 <li><a href="http://msdn.microsoft.com/en-us/library/sd2w2ew5.aspx">New constraint</a></li>
+</ul><p>Scenario1:<em><strong>What will be printed at the Console and Why?</strong></em></p>
+
+<div class="highlight highlight-csharp"><pre><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">PrintAreEqual</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">T</span> <span class="n">s</span><span class="p">,</span> <span class="n">T</span> <span class="n">t</span><span class="p">)</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="k">class</span>
+        <span class="err">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">s</span> <span class="p">==</span> <span class="n">t</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="kt">string</span> <span class="n">s1</span> <span class="p">=</span> <span class="s">"target"</span><span class="p">;</span>
+            <span class="n">System</span><span class="p">.</span><span class="n">Text</span><span class="p">.</span><span class="n">StringBuilder</span> <span class="n">sb</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">Text</span><span class="p">.</span><span class="n">StringBuilder</span><span class="p">(</span><span class="s">"target"</span><span class="p">);</span>
+            <span class="kt">string</span> <span class="n">s2</span> <span class="p">=</span> <span class="n">sb</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
+            <span class="n">PrintAreEqual</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">);</span>
+            <span class="n">Console</span><span class="p">.</span><span class="n">Read</span><span class="p">();</span>
+        <span class="p">}</span>
+</pre></div>
+
+<p><em><strong>The answer is</strong></em> : <strong>False **, using **where T : class constraint</strong> induce that == will check reference equality and not value equality.
+for more information please go to:</p>
+
+<ul>
+<li><a href="http://msdn.microsoft.com/en-us/library/d5x73970.aspx">constraint</a></li>
 </ul><h2>
 <a name="generic-collections" class="anchor" href="#generic-collections"><span class="octicon octicon-link"></span></a>Generic Collections</h2>
 
