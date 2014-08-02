@@ -9,9 +9,9 @@ csharp
 ##### Is instrumentTable value type or reference type?
 
 #### Scenario 2: 
-`object[] objects = new string[10];`
-`objects[0] = "hello"; `
-`objects[1] = new object(); `
+`object[] objects = new string[10];
+objects[0] = "hello"; 
+objects[1] = new object(); `
 
 ##### What is wrong with this peace of code? 
 
@@ -22,5 +22,5 @@ I decide to work on but got frustrated not to find good articles which gather ba
 This project not aim to provide tutorials, but it will give for keys topics: summaries, references and sometimes peace of codes.
 
 Visite the project overview: 
-[GitHub](http://saidmohamedali.github.io/csharp/)
+[Csharp Main Topics](http://saidmohamedali.github.io/csharp/)
 
