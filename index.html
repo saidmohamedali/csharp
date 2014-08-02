@@ -129,10 +129,41 @@ The classes in the System.Collections namespace do not store elements as specifi
 
 <ul>
 <li><a href="http://msdn.microsoft.com/fr-fr/library/ms172181%28v=vs.110%29.aspx">Generic collections</a></li>
+<li><a href="http://msdn.microsoft.com/en-us/magazine/cc163377.aspx">when to use collections</a></li>
 </ul><h2>
 <a name="variance" class="anchor" href="#variance"><span class="octicon octicon-link"></span></a>Variance</h2>
 
-<h1>
+<p>Scenario1: <em><strong>Why does this code not compile?</strong></em></p>
+
+<div class="highlight highlight-csharp"><pre><span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">ints</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;();</span>
+<span class="n">ints</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+<span class="n">ints</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="m">10</span><span class="p">);</span>
+<span class="n">ints</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="m">42</span><span class="p">);</span>
+<span class="n">List</span><span class="p">&lt;</span><span class="kt">object</span><span class="p">&gt;</span> <span class="n">objects</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">object</span><span class="p">&gt;();</span>
+<span class="n">objects</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="n">ints</span><span class="p">);</span>
+
+</pre></div>
+
+<p><em><strong>The answer is</strong></em> : Generic collections are strongly type, event if <strong>int</strong> is convertible to <strong>object</strong>, <code>List&lt;int&gt;</code> are not <code>List&lt;object&gt;</code>. There is simple workarround:</p>
+
+<p><code>AddRange&lt;int, object&gt;(ints, objects);</code></p>
+
+<div class="highlight highlight-csharp"><pre><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">AddRange</span><span class="p">&lt;</span><span class="n">S</span><span class="p">,</span> <span class="n">D</span><span class="p">&gt;(</span><span class="n">List</span><span class="p">&lt;</span><span class="n">S</span><span class="p">&gt;</span> <span class="n">source</span><span class="p">,</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">D</span><span class="p">&gt;</span> <span class="n">destination</span><span class="p">)</span>
+        <span class="k">where</span> <span class="n">S</span> <span class="p">:</span> <span class="n">D</span>
+        <span class="p">{</span>
+            <span class="k">foreach</span> <span class="p">(</span><span class="n">S</span> <span class="n">sourceElement</span> <span class="k">in</span> <span class="n">source</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">destination</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">sourceElement</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+</pre></div>
+
+<p>For further information, please visit: </p>
+
+<ul>
+<li><a href="http://msdn.microsoft.com/fr-fr/library/ms228359%28v=vs.90%29.aspx">Variance</a></li>
+<li><a href="http://sebastiencourtois.wordpress.com/2010/04/14/nouveauts-c-net-4-introduction-la-covariance-contravariance">Covariance - Contravariance</a></li>
+</ul><h1>
 <a name="expressions" class="anchor" href="#expressions"><span class="octicon octicon-link"></span></a>Expressions</h1>
 
 <h2>
