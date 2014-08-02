@@ -38,7 +38,9 @@ Topics are not exhaustive but they are essential and organized like a check-list
 <h1>
 <a name="generics" class="anchor" href="#generics"><span class="octicon octicon-link"></span></a>Generics</h1>
 
-<p>Generics provide type safety without the overhead of multiple implementations, but there are few thinks to keep in mind while using them.</p>
+<p>Generics provide type safety without the overhead of multiple implementations.
+It offers the ability to write a single class that other client code can use without incurring the cost or risk of runtime casts or boxing operations.
+But there are few thinks to keep in mind while using generics.</p>
 
 <p>Scenario:<em><strong>Why does this code not compile?</strong></em></p>
 
@@ -69,28 +71,28 @@ For further information, please visit: <a href="http://msdn.microsoft.com/en-us/
     <span class="p">}</span>
 </pre></div>
 
-<p><em><strong>The answer is</strong></em> : the CreateItem Methode tries to  instantiate a new object of type T and the compile does not now if there is a parameter-less constructor of type T so to make it work we need add <strong>new</strong> constraint to this generic class.
+<p><em><strong>The answer is</strong></em> : CreateItem Methode tries to  instantiate a new object of type T and the compile does not now if there is a parameter-less constructor of type T so to make it work we need add <strong>new</strong> constraint to this generic class.
 for more information please go to:</p>
 
 <ul>
 <li><a href="http://msdn.microsoft.com/en-us/library/sd2w2ew5.aspx">New constraint</a></li>
-</ul><p>Scenario1:<em><strong>What will be printed at the Console and Why?</strong></em></p>
+</ul><p>Scenario2:<em><strong>What will be printed on the Console and Why?</strong></em></p>
 
 <div class="highlight highlight-csharp"><pre><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">PrintAreEqual</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">T</span> <span class="n">s</span><span class="p">,</span> <span class="n">T</span> <span class="n">t</span><span class="p">)</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="k">class</span>
-        <span class="err">{</span>
-            <span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">s</span> <span class="p">==</span> <span class="n">t</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">()</span>
-        <span class="p">{</span>
+<span class="err">{</span>
+<span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">s</span> <span class="p">==</span> <span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">()</span>
+<span class="p">{</span>
             <span class="kt">string</span> <span class="n">s1</span> <span class="p">=</span> <span class="s">"target"</span><span class="p">;</span>
             <span class="n">System</span><span class="p">.</span><span class="n">Text</span><span class="p">.</span><span class="n">StringBuilder</span> <span class="n">sb</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">Text</span><span class="p">.</span><span class="n">StringBuilder</span><span class="p">(</span><span class="s">"target"</span><span class="p">);</span>
             <span class="kt">string</span> <span class="n">s2</span> <span class="p">=</span> <span class="n">sb</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
             <span class="n">PrintAreEqual</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">);</span>
             <span class="n">Console</span><span class="p">.</span><span class="n">Read</span><span class="p">();</span>
-        <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
-<p><em><strong>The answer is</strong></em> : <strong>False **, using **where T : class constraint</strong> induce that == will check reference equality and not value equality.
+<p><em><strong>The answer is</strong></em> : False.  Using <strong>where T : class constraint</strong> induce that == will check reference equality and not value equality.
 for more information please go to:</p>
 
 <ul>
