@@ -1,0 +1,5 @@
+C:\Users\U0160734\Documents\GitHub\csharp\CharpsMaintTopics\Generics\Constraints\Scenario2\bin\Debug\Scenario2.exe.config
+C:\Users\U0160734\Documents\GitHub\csharp\CharpsMaintTopics\Generics\Constraints\Scenario2\bin\Debug\Scenario2.exe
+C:\Users\U0160734\Documents\GitHub\csharp\CharpsMaintTopics\Generics\Constraints\Scenario2\bin\Debug\Scenario2.pdb
+C:\Users\U0160734\Documents\GitHub\csharp\CharpsMaintTopics\Generics\Constraints\Scenario2\obj\Debug\Scenario2.exe
+C:\Users\U0160734\Documents\GitHub\csharp\CharpsMaintTopics\Generics\Constraints\Scenario2\obj\Debug\Scenario2.pdb
