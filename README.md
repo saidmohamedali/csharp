@@ -21,7 +21,11 @@ objects[1] = new object(); `
 
 Guest what, I find my self blocked on questions like these while challenging my self c# on-line assements.
 I find many weak areas about my c# programming skills.
-I decide to work on, but got frustrated not to find good articles which gather basics/advanced topics on c# programming so I decide to create this project.
+
+I decide to work on, but got frustrated not to find good articles which gather basics/advanced topics on c# programming so
+
+I decide to create this project.
+
 This project not aim to provide tutorials, but it will give for keys topics: summaries, references and sometimes peace of codes.
 
 Visite the project overview: 
