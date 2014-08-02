@@ -4,15 +4,18 @@ csharp
 
 #### Scenario 1:
 
-`Instrument[] instrumentTable = new Instrument[100] // Instrument is class`
+```csharp
+Instrument[] instrumentTable = new Instrument[100] // Instrument is class
+```
 
 ##### Is instrumentTable value type or reference type?
 
 #### Scenario 2: 
+```csharp
 `object[] objects = new string[10];
 objects[0] = "hello"; 
 objects[1] = new object(); `
-
+```
 ##### What is wrong with this peace of code? 
 
 
