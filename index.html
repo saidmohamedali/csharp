@@ -158,11 +158,67 @@ The classes in the System.Collections namespace do not store elements as specifi
         <span class="p">}</span>
 </pre></div>
 
-<p>For further information, please visit: </p>
+<p>A generic interface or delegate is called variant if its generic parameters are declared covariant or contravariant
+For further information, please visit: </p>
 
 <ul>
 <li><a href="http://msdn.microsoft.com/fr-fr/library/ms228359%28v=vs.90%29.aspx">Variance</a></li>
-<li><a href="http://sebastiencourtois.wordpress.com/2010/04/14/nouveauts-c-net-4-introduction-la-covariance-contravariance">Covariance - Contravariance</a></li>
+</ul><p>Scenario2:<em><strong>What king of runtime exception do we get with code above?</strong></em></p>
+
+<div class="highlight highlight-csharp"><pre> <span class="k">class</span> <span class="nc">Instrument</span> <span class="p">{</span>
+        <span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="nf">ToString</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="s">"I am simple Instrument"</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">class</span> <span class="nc">Index</span><span class="p">:</span><span class="n">Instrument</span> <span class="p">{</span>
+        <span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="nf">ToString</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="s">"I am an Index"</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">class</span> <span class="nc">IndexOption</span> <span class="p">:</span> <span class="n">Index</span> <span class="p">{</span>
+        <span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="nf">ToString</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="s">"I am an option over Index"</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">class</span> <span class="nc">Program</span>
+    <span class="p">{</span>
+        <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">Index</span> <span class="n">l_index</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Index</span><span class="p">();</span>
+            <span class="n">Instrument</span> <span class="n">l_instrument</span> <span class="p">=</span> <span class="n">l_index</span><span class="p">;</span>
+
+            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">l_instrument</span><span class="p">);</span>
+
+            <span class="n">IndexOption</span> <span class="n">l_indexOption</span> <span class="p">=</span> <span class="k">new</span> <span class="n">IndexOption</span><span class="p">();</span>
+            <span class="n">l_instrument</span> <span class="p">=</span> <span class="n">l_indexOption</span><span class="p">;</span>
+            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">l_instrument</span><span class="p">);</span>
+
+            <span class="n">Instrument</span><span class="p">[]</span> <span class="n">array</span> <span class="p">=</span> <span class="k">new</span> <span class="n">IndexOption</span><span class="p">[</span><span class="m">10</span><span class="p">];</span>
+            <span class="n">array</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Index</span><span class="p">();</span>
+            <span class="n">array</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Instrument</span><span class="p">();</span>
+            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">array</span><span class="p">);</span>
+            <span class="n">Console</span><span class="p">.</span><span class="n">Read</span><span class="p">();</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+</pre></div>
+
+<p><em><strong>The answer is</strong></em> : <strong>System.ArrayTypeMismatchException</strong> with theses lines:   </p>
+
+<div class="highlight highlight-csharp"><pre><span class="n">array</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Index</span><span class="p">();</span>
+<span class="n">array</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Instrument</span><span class="p">();</span>
+</pre></div>
+
+<p>An Index object is an Instrument because of Implicit Conversion: <strong>covariance</strong>  but when it came to array, we better not forget that  <strong>covariance</strong>  is not type safe. Run-time failure is due to run-time type checking when assign operation actually happen.
+In this scenario we should add extra method in order to be able to add <strong>Instrument</strong> or <strong>Index</strong> into <strong>array</strong>.</p>
+
+<ul>
+<li><a href="http://sebastiencourtois.wordpress.com/2010/04/14/nouveauts-c-net-4-introduction-la-covariance-contravariance">Covariance - Contravariance in french</a></li>
+<li><a href="http://msdn.microsoft.com/en-us/library/ee207183.aspx">Covariance - Contravariance</a></li>
 </ul><h1>
 <a name="expressions" class="anchor" href="#expressions"><span class="octicon octicon-link"></span></a>Expressions</h1>
 
@@ -170,10 +226,13 @@ The classes in the System.Collections namespace do not store elements as specifi
 <li><a href="http://msdn.microsoft.com/fr-fr/library/bb397951.aspx">Expression Trees</a></li>
 <li><a href="http://blogs.msdn.com/b/charlie/archive/2008/01/31/expression-tree-basics.aspx">Expression Trees Basics</a></li>
 <li><a href="http://blogs.msdn.com/b/csharpfaq/archive/2009/09/14/generating-dynamic-methods-with-expression-trees-in-visual-studio-2010.aspx">Dynamic Expression Trees</a></li>
-<li>
-<a href="http://msdn.microsoft.com/fr-fr/library/bb397687.aspx">Lambda Expressions</a>
-An Expression tree need to be compiled</li>
-</ul><div class="highlight highlight-csharp"><pre><span class="kt">int</span> <span class="n">factorial</span> <span class="p">=</span> <span class="n">Expression</span><span class="p">.</span><span class="n">Lambda</span><span class="p">&lt;</span><span class="n">Func</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;&gt;(</span><span class="n">block</span><span class="p">,</span> <span class="k">value</span><span class="p">).</span><span class="n">Compile</span><span class="p">()(</span><span class="m">5</span><span class="p">);</span>
+<li><a href="http://msdn.microsoft.com/fr-fr/library/bb397687.aspx">Lambda Expressions</a></li>
+</ul><p>Just few thing to keep in mind for Expression trees
+-need to be compiled with <strong>Compile()</strong> method
+-need to be run with (parameter(s)) or ()
+Example:</p>
+
+<div class="highlight highlight-csharp"><pre><span class="kt">int</span> <span class="n">l_result</span> <span class="p">=</span> <span class="n">Expression</span><span class="p">.</span><span class="n">Lambda</span><span class="p">&lt;</span><span class="n">Func</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;&gt;(</span><span class="n">block</span><span class="p">,</span> <span class="k">value</span><span class="p">).</span><span class="n">Compile</span><span class="p">()(</span><span class="m">5</span><span class="p">);</span>
 </pre></div>
 
 <h2>
