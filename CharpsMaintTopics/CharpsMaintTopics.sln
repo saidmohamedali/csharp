@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Variance", "Variance", "{F1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scenario1", "Generics\Variance\Scenario1\Scenario1.csproj", "{6B87A156-4161-41C8-8D44-C229EAD0E6FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scenario2", "Generics\Variance\Scenario2\Scenario2.csproj", "{2D3B5BA0-2DD6-424A-8AC1-502107356320}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{6B87A156-4161-41C8-8D44-C229EAD0E6FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B87A156-4161-41C8-8D44-C229EAD0E6FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B87A156-4161-41C8-8D44-C229EAD0E6FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D3B5BA0-2DD6-424A-8AC1-502107356320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D3B5BA0-2DD6-424A-8AC1-502107356320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D3B5BA0-2DD6-424A-8AC1-502107356320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D3B5BA0-2DD6-424A-8AC1-502107356320}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,5 +63,6 @@ Global
 		{0794F7DF-C728-4962-A584-7702DD475BD8} = {F352106C-844B-4D59-8E67-2CF6FE9D77A5}
 		{F1A4930E-A21D-4C24-AC15-AAFB7E19BB29} = {538C3394-EA17-43FF-9A42-1307B5B6B8A6}
 		{6B87A156-4161-41C8-8D44-C229EAD0E6FE} = {F1A4930E-A21D-4C24-AC15-AAFB7E19BB29}
+		{2D3B5BA0-2DD6-424A-8AC1-502107356320} = {F1A4930E-A21D-4C24-AC15-AAFB7E19BB29}
 	EndGlobalSection
 EndGlobal
