@@ -12,7 +12,7 @@ Instrument[] instrumentTable = new Instrument[100] // Instrument is class
 
 #### Scenario 2: 
 ```csharp
-`object[] objects = new string[10];
+object[] objects = new string[10];
 objects[0] = "hello"; 
 objects[1] = new object(); `
 ```
