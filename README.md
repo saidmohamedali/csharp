@@ -14,7 +14,7 @@ Instrument[] instrumentTable = new Instrument[100] // Instrument is class
 ```csharp
 object[] objects = new string[10];
 objects[0] = "hello"; 
-objects[1] = new object(); `
+objects[1] = new object(); 
 ```
 ##### What is wrong with this peace of code? 
 
