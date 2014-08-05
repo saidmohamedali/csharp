@@ -30,18 +30,7 @@ namespace Scenario3
         }
     }
 
-    public class InstrumentPrinter {
 
-        public Action<Instrument> GetPrinters()
-        {
-            Action<Instrument> NamePrintAction = x => Console.WriteLine("Instrument Type is : {0}", x.ToString());
-            Action<Instrument> PricePrintAction = x => Console.WriteLine("Instrument Price: {0}", x.Price);
-            Action<IndexOption> PremiumPrintAction = x => Console.WriteLine("Extra Info: {0}", x.Premium);
-
-            // return PricePrintAction += PremiumPrintAction;
-            return (Action<Instrument>)Delegate.Combine(NamePrintAction, PricePrintAction, PremiumPrintAction);
-        }
-    }
     class Program
     {
         static void Main(string[] args)
