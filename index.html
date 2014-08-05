@@ -196,10 +196,19 @@ For further information, please visit: </p>
             <span class="n">l_instrument</span> <span class="p">=</span> <span class="n">l_indexOption</span><span class="p">;</span>
             <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">l_instrument</span><span class="p">);</span>
 
-            <span class="n">Instrument</span><span class="p">[]</span> <span class="n">array</span> <span class="p">=</span> <span class="k">new</span> <span class="n">IndexOption</span><span class="p">[</span><span class="m">10</span><span class="p">];</span>
-            <span class="n">array</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Index</span><span class="p">();</span>
-            <span class="n">array</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Instrument</span><span class="p">();</span>
-            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">array</span><span class="p">);</span>
+            <span class="n">Instrument</span><span class="p">[]</span> <span class="n">l_instruments</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Instrument</span><span class="p">[</span><span class="m">3</span><span class="p">];</span>
+            <span class="n">l_instruments</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Index</span><span class="p">();</span>
+            <span class="n">l_instruments</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Instrument</span><span class="p">();</span>
+            <span class="n">l_instruments</span><span class="p">[</span><span class="m">2</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">IndexOption</span><span class="p">();</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">l_i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">l_i</span> <span class="p">&lt;</span> <span class="n">l_instruments</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="p">++</span><span class="n">l_i</span><span class="p">)</span>
+                <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"array[{0}]={1}:"</span><span class="p">,</span> <span class="n">l_i</span><span class="p">,</span> <span class="n">l_instruments</span><span class="p">[</span><span class="n">l_i</span><span class="p">]));</span>
+
+            <span class="n">Instrument</span><span class="p">[]</span> <span class="n">l_instruments2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">IndexOption</span><span class="p">[</span><span class="m">3</span><span class="p">];</span>
+            <span class="n">l_instruments2</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Index</span><span class="p">();</span> 
+            <span class="n">l_instruments2</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Instrument</span><span class="p">();</span>
+            <span class="n">l_instruments2</span><span class="p">[</span><span class="m">2</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">IndexOption</span><span class="p">();</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">l_i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">l_i</span> <span class="p">&lt;</span> <span class="n">l_instruments2</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="p">++</span><span class="n">l_i</span><span class="p">)</span>
+                <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"array[{0}]={1}:"</span><span class="p">,</span> <span class="n">l_i</span><span class="p">,</span> <span class="n">l_instruments2</span><span class="p">[</span><span class="n">l_i</span><span class="p">]));</span>
             <span class="n">Console</span><span class="p">.</span><span class="n">Read</span><span class="p">();</span>
         <span class="p">}</span>
 
@@ -209,12 +218,12 @@ For further information, please visit: </p>
 
 <p><em><strong>The answer is</strong></em> : <strong>System.ArrayTypeMismatchException</strong> with theses lines:   </p>
 
-<div class="highlight highlight-csharp"><pre><span class="n">array</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Index</span><span class="p">();</span>
-<span class="n">array</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Instrument</span><span class="p">();</span>
+<div class="highlight highlight-csharp"><pre><span class="n">l_instruments2</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Index</span><span class="p">();</span> 
+<span class="n">l_instruments2</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Instrument</span><span class="p">();</span>
 </pre></div>
 
-<p>An Index object is an Instrument because of Implicit Conversion: <strong>covariance</strong>  but when it came to array, we better not forget that  <strong>covariance</strong>  is not type safe. Run-time failure is due to run-time type checking when assign operation actually happen.
-In this scenario we should add extra method in order to be able to add <strong>Instrument</strong> or <strong>Index</strong> into <strong>array</strong>.</p>
+<p>An Index object and IndexOption are Instrument because of Implicit Conversion: <strong>covariance</strong>  but when it came to array, we better not forget that  <strong>covariance</strong>  is not type safe. Run-time failure is due to run-time type checking when assign operation actually happen. Array methods are not covariante.
+In this scenario we should add extra method in order to be able to add <strong>Instrument</strong> or <strong>Index</strong> into <strong>l_instruments2</strong> array.</p>
 
 <ul>
 <li><a href="http://sebastiencourtois.wordpress.com/2010/04/14/nouveauts-c-net-4-introduction-la-covariance-contravariance">Covariance - Contravariance in french</a></li>
