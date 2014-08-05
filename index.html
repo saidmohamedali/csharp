@@ -54,11 +54,13 @@ But there are few thinks to keep in mind while using generics.</p>
 <span class="p">}</span>
 </pre></div>
 
-<p><em><strong>The answer is:</strong></em> the ** + operator** is not defined for T.
-For further information, please visit: 
-*<a href="http://msdn.microsoft.com/en-us/library/c6cyy67b%28v=vs.90%29.aspx">Generics</a>.</p>
+<p><em><strong>The answer is:</strong></em> the  <strong>+ operator</strong> is not defined for T.
+For further information, please visit:</p>
 
-<h2>
+<ul>
+<li>
+<a href="http://msdn.microsoft.com/en-us/library/c6cyy67b%28v=vs.90%29.aspx">Generics</a>.</li>
+</ul><h2>
 <a name="constraints" class="anchor" href="#constraints"><span class="octicon octicon-link"></span></a>Constraints</h2>
 
 <p>Scenario1:<em><strong>Why does this code not compile?</strong></em></p>
@@ -225,9 +227,64 @@ For further information, please visit: </p>
 <p>An Index object and IndexOption are Instrument because of Implicit Conversion: <strong>covariance</strong>  but when it came to array, we better not forget that  <strong>covariance</strong>  is not type safe. Run-time failure is due to run-time type checking when assign operation actually happen. Array methods are not covariante.
 In this scenario we should add extra method in order to be able to add <strong>Instrument</strong> or <strong>Index</strong> into <strong>l_instruments2</strong> array.</p>
 
+<p>For further information, please visit:</p>
+
 <ul>
 <li><a href="http://sebastiencourtois.wordpress.com/2010/04/14/nouveauts-c-net-4-introduction-la-covariance-contravariance">Covariance - Contravariance in french</a></li>
 <li><a href="http://msdn.microsoft.com/en-us/library/ee207183.aspx">Covariance - Contravariance</a></li>
+</ul><h3>
+<a name="variance-in-delegates" class="anchor" href="#variance-in-delegates"><span class="octicon octicon-link"></span></a>Variance in Delegates</h3>
+
+<p>Scenario3: <em><strong>What is wrong with this peace of code?</strong></em></p>
+
+<div class="highlight highlight-csharp"><pre><span class="k">public</span> <span class="k">class</span> <span class="nc">Instrument</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="kt">double</span> <span class="n">Price</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="nf">ToString</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="s">"I am simple Instrument"</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">Index</span> <span class="p">:</span> <span class="n">Instrument</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="nf">ToString</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="s">"I am an Index"</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">IndexOption</span> <span class="p">:</span> <span class="n">Index</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="kt">double</span> <span class="n">Premium</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+        <span class="k">public</span> <span class="k">override</span> <span class="kt">string</span> <span class="nf">ToString</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="s">"I am an option over Index"</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">class</span> <span class="nc">Program</span>
+    <span class="p">{</span>
+        <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">InstrumentPrinter</span> <span class="n">l_printer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">InstrumentPrinter</span><span class="p">();</span>
+            <span class="n">Action</span><span class="p">&lt;</span><span class="n">Instrument</span><span class="p">&gt;</span> <span class="n">l_PrintNameAction</span> <span class="p">=</span> <span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Instrument Type is : {0}"</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+            <span class="n">Action</span><span class="p">&lt;</span><span class="n">Instrument</span><span class="p">&gt;</span> <span class="n">l_PrintPriceAction</span> <span class="p">=</span> <span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Instrument Price: {0}"</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">Price</span><span class="p">);</span>
+            <span class="n">Action</span><span class="p">&lt;</span><span class="n">IndexOption</span><span class="p">&gt;</span> <span class="n">l_PrintPremiumAction</span> <span class="p">=</span> <span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Extra Info: {0}"</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">Premium</span><span class="p">);</span>
+            <span class="n">Delegate</span><span class="p">.</span><span class="n">Combine</span><span class="p">(</span><span class="n">l_PrintNameAction</span><span class="p">,</span> <span class="n">l_PrintPriceAction</span><span class="p">,</span> <span class="n">l_PrintPremiumAction</span><span class="p">).</span>
+                <span class="n">DynamicInvoke</span><span class="p">((</span><span class="k">new</span> <span class="n">IndexOption</span> <span class="p">{</span> <span class="n">Price</span> <span class="p">=</span> <span class="m">12</span><span class="p">,</span> <span class="n">Premium</span> <span class="p">=</span> <span class="m">2</span> <span class="p">}));</span>
+
+
+            <span class="n">Console</span><span class="p">.</span><span class="n">Read</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+
+</pre></div>
+
+<p><em><strong>The answer is</strong></em> : Delegate.Combine lead to a run-time exception because The Combine method or (+) operator does not support variant delegate.   </p>
+
+<p>For further information, please visit:</p>
+
+<ul>
+<li><a href="http://msdn.microsoft.com/en-us/library/dd233060.aspx">Variance in delegate</a></li>
 </ul><h1>
 <a name="expressions" class="anchor" href="#expressions"><span class="octicon octicon-link"></span></a>Expressions</h1>
 
