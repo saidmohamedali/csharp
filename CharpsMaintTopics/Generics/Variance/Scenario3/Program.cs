@@ -35,7 +35,7 @@ namespace Scenario3
     {
         static void Main(string[] args)
         {
-            InstrumentPrinter l_printer = new InstrumentPrinter();
+          
             Action<Instrument> l_PrintNameAction = x => Console.WriteLine("Instrument Type is : {0}", x.ToString());
             Action<Instrument> l_PrintPriceAction = x => Console.WriteLine("Instrument Price: {0}", x.Price);
             Action<IndexOption> l_PrintPremiumAction = x => Console.WriteLine("Extra Info: {0}", x.Premium);
