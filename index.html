@@ -304,6 +304,44 @@ Example:</p>
 <h2>
 <a name="operators" class="anchor" href="#operators"><span class="octicon octicon-link"></span></a>Operators</h2>
 
+<p>Scenario2:<em><strong>What will be printed on the console? and Why?</strong></em></p>
+
+<div class="highlight highlight-csharp"><pre><span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">ten</span> <span class="p">=</span> <span class="m">10</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">i2</span> <span class="p">=</span> <span class="m">2147483647</span> <span class="p">+</span> <span class="n">ten</span><span class="p">;</span>
+
+
+            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">i2</span> <span class="p">==</span> <span class="m">2147483657</span><span class="p">);</span>
+            <span class="n">Console</span><span class="p">.</span><span class="n">Read</span><span class="p">();</span>
+        <span class="p">}</span>
+</pre></div>
+
+<p><em><strong>The answer is</strong></em> : <strong>False</strong>, Because <strong>2147483647</strong> is the max value of <code>integer</code>, by default:</p>
+
+<ul>
+<li>non-constant expressions are not checked on the run-time: no run-time exception are raised </li>
+<li>if the operation contains contains one or more non-constant values: the compiler does not detect the overflow.</li>
+</ul><p>Unless you want this behavior, this is a kind of hidden bug. To avoid it we got two choices: </p>
+
+<ul>
+<li>compile with /checked</li>
+<li>use the key word checked</li>
+</ul><div class="highlight highlight-csharp"><pre><span class="c1">// Checked expression.</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="k">checked</span><span class="p">(</span><span class="m">2147483647</span> <span class="p">+</span> <span class="n">ten</span><span class="p">));</span>
+
+<span class="c1">// Checked block. </span>
+<span class="k">checked</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i3</span> <span class="p">=</span> <span class="m">2147483647</span> <span class="p">+</span> <span class="n">ten</span><span class="p">;</span>
+     <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">i3</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>For further information, please visit:</p>
+
+<p>*<a href="http://msdn.microsoft.com/en-us/library/74b4xzyw.aspx">Checked and Unchecked</a></p>
+
 <ul>
 <li><a href="http://msdn.microsoft.com/en-us/library/ms173145.aspx">C# Operators</a></li>
 </ul><h2>
