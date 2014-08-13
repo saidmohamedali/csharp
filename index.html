@@ -304,7 +304,7 @@ Example:</p>
 <h2>
 <a name="operators" class="anchor" href="#operators"><span class="octicon octicon-link"></span></a>Operators</h2>
 
-<p>Scenario2:<em><strong>What will be printed on the console? and Why?</strong></em></p>
+<p>Scenario1:<em><strong>What will be printed on the console? and Why?</strong></em></p>
 
 <div class="highlight highlight-csharp"><pre><span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
         <span class="p">{</span>
@@ -355,7 +355,43 @@ What is happening?</p>
 <a name="arrays-and-collections" class="anchor" href="#arrays-and-collections"><span class="octicon octicon-link"></span></a>Arrays and Collections</h1>
 
 <h2>
-<a name="array-and-collection-usage" class="anchor" href="#array-and-collection-usage"><span class="octicon octicon-link"></span></a>Array and Collection Usage</h2>
+<a name="arrays" class="anchor" href="#arrays"><span class="octicon octicon-link"></span></a>Arrays</h2>
+
+<p>Scenario1:<em><strong>Is this assign operation possible? and Why?</strong></em></p>
+
+<div class="highlight highlight-csharp"><pre><span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">object</span><span class="p">[]</span> <span class="n">objectArray</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[]</span> <span class="p">{</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">4</span> <span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><em><strong>The answer is</strong></em> : <strong>False</strong>, Because of strong type checking </p>
+
+<p>Scenario2:<em>** Does this cast operation really happen? So What is Wrong?**</em></p>
+
+<div class="highlight highlight-csharp"><pre><span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">int</span><span class="p">[]</span> <span class="n">objectArray</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[]</span> <span class="p">{</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">4</span> <span class="p">};</span>
+  <span class="n">Array</span> <span class="n">myArray</span> <span class="p">=</span> <span class="p">(</span><span class="n">Array</span><span class="p">)</span><span class="n">objectArray</span><span class="p">;</span>
+  <span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">myArray</span><span class="p">.</span><span class="n">GetType</span><span class="p">()</span> <span class="p">==</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Array</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><em><strong>The answer is</strong></em> : <strong>False</strong>, GetType() return  exact runtime type of the current instance. 
+int[] is a reference type, pointing to int[] type. Casting int[] to Array is just about reference casting but not pointed values.
+The following statement return <strong>True</strong></p>
+
+<div class="highlight highlight-csharp"><pre>  <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">myArray</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">BaseType</span> <span class="p">==</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Array</span><span class="p">));</span>
+</pre></div>
+
+<p>if we want to cast, the actually pointed of <strong>objectArray</strong> to Array, we could use <strong>Cast</strong> extension method of System.Linq for instance.</p>
+
+<p>For further information, please visit: </p>
+
+<ul>
+<li><a href="http://msdn.microsoft.com/en-us/library/system.array%28v=vs.110%29.aspx">Arrays</a></li>
+</ul><h3>
+<a name="array-and-collection-usage" class="anchor" href="#array-and-collection-usage"><span class="octicon octicon-link"></span></a>Array and Collection Usage</h3>
 
 <h1>
 <a name="class-members" class="anchor" href="#class-members"><span class="octicon octicon-link"></span></a>Class Members</h1>
