@@ -391,7 +391,110 @@ The following statement return <strong>True</strong></p>
 <ul>
 <li><a href="http://msdn.microsoft.com/en-us/library/system.array%28v=vs.110%29.aspx">Arrays</a></li>
 </ul><h3>
-<a name="array-and-collection-usage" class="anchor" href="#array-and-collection-usage"><span class="octicon octicon-link"></span></a>Array and Collection Usage</h3>
+<a name="array-usage" class="anchor" href="#array-usage"><span class="octicon octicon-link"></span></a>Array Usage</h3>
+
+<p>Scenario1: <em><strong>do you think private member <em>jsonSepartors</em>| array is safe from modification?</strong></em></p>
+
+<div class="highlight highlight-csharp"><pre><span class="k">public</span> <span class="k">enum</span> <span class="n">ESperatorType</span> <span class="p">{</span> <span class="n">JSON</span><span class="p">,</span> <span class="n">CSV</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">Seprators</span>
+    <span class="p">{</span>
+
+        <span class="k">private</span> <span class="k">static</span> <span class="kt">char</span><span class="p">[]</span> <span class="n">jsonSepartors</span> <span class="p">=</span> <span class="p">{</span> <span class="sc">'\"'</span><span class="p">,</span> <span class="sc">'['</span><span class="p">,</span> <span class="sc">']'</span><span class="p">,</span> <span class="sc">'{'</span><span class="p">,</span> <span class="sc">'}'</span><span class="p">,</span> <span class="sc">':'</span> <span class="p">};</span>
+        <span class="k">private</span> <span class="k">static</span> <span class="kt">char</span><span class="p">[]</span> <span class="n">csvSperators</span> <span class="p">=</span> <span class="p">{</span> <span class="sc">','</span><span class="p">,</span> <span class="sc">';'</span> <span class="p">};</span>
+        <span class="k">public</span> <span class="k">static</span> <span class="kt">char</span><span class="p">[]</span> <span class="nf">GetSeperators</span><span class="p">(</span><span class="n">ESperatorType</span> <span class="n">p_speratorType</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">ESperatorType</span><span class="p">.</span><span class="n">JSON</span> <span class="p">==</span> <span class="n">p_speratorType</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">jsonSepartors</span><span class="p">;</span>
+            <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">ESperatorType</span><span class="p">.</span><span class="n">CSV</span> <span class="p">==</span> <span class="n">p_speratorType</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">csvSperators</span><span class="p">;</span>
+            <span class="k">else</span>
+                <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+          <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">class</span> <span class="nc">Program</span>
+    <span class="p">{</span>
+        <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">foreach</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="k">in</span> <span class="n">Seprators</span><span class="p">.</span><span class="n">GetSeperators</span><span class="p">(</span><span class="n">ESperatorType</span><span class="p">.</span><span class="n">JSON</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">Seprators</span><span class="p">.</span><span class="n">GetSeperators</span><span class="p">(</span><span class="n">ESperatorType</span><span class="p">.</span><span class="n">JSON</span><span class="p">)[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="sc">'A'</span><span class="p">;</span>
+            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">();</span>
+            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"First element of jsonSepartors will now be 'A'"</span><span class="p">);</span>
+            <span class="k">foreach</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="k">in</span> <span class="n">Seprators</span><span class="p">.</span><span class="n">GetSeperators</span><span class="p">(</span><span class="n">ESperatorType</span><span class="p">.</span><span class="n">JSON</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">Console</span><span class="p">.</span><span class="n">Read</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+
+<p><em><strong>The answer is</strong></em> : <strong>No</strong>, you could see on the console that the first character changed to 'A'</p>
+
+<p>Scenario1.1: <em><strong>Do you think a smart way will be make jsonSepartors read only?</strong></em></p>
+
+<div class="highlight highlight-csharp"><pre>  <span class="k">private</span> <span class="k">readonly</span> <span class="k">static</span> <span class="kt">char</span><span class="p">[]</span> <span class="n">jsonSepartors</span> <span class="p">=</span> <span class="p">{</span> <span class="sc">'\"'</span><span class="p">,</span> <span class="sc">'['</span><span class="p">,</span> <span class="sc">']'</span><span class="p">,</span> <span class="sc">'{'</span><span class="p">,</span> <span class="sc">'}'</span><span class="p">,</span> <span class="sc">':'</span> <span class="p">};</span>
+</pre></div>
+
+<p><em><strong>The answer is</strong></em> : <strong>No</strong> the issue still remains the same.</p>
+
+<p>Scenario1.2: <em><strong>What about this way:</strong></em></p>
+
+<div class="highlight highlight-csharp"><pre> <span class="p">(</span><span class="kt">char</span><span class="p">[])</span><span class="n">jsonSepartors</span><span class="p">.</span><span class="n">Clone</span><span class="p">();</span>
+</pre></div>
+
+<p><em><strong>The answer is</strong></em> : <strong>Oh No, this is too dirty</strong>, this solution works but this has serious performance implications.
+The solution is not about container type but about <strong>data type</strong>. For private and read-only data, consider not to use <strong>array</strong> for storage or if you are constrained to use array, you could simply restrict the Interface by using ICollection at the <code>GetSeparators</code> Method.</p>
+
+<p>Scenario1.3: <em><strong>Combo solution: Not using array and restrict the Interface</strong></em></p>
+
+<div class="highlight highlight-csharp"><pre> <span class="k">public</span> <span class="k">enum</span> <span class="n">ESperatorType</span> <span class="p">{</span> <span class="n">JSON</span><span class="p">,</span> <span class="n">CSV</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">Seprators</span>
+    <span class="p">{</span>
+
+        <span class="k">private</span> <span class="k">static</span> <span class="n">ICollection</span><span class="p">&lt;</span><span class="kt">char</span><span class="p">&gt;</span> <span class="n">jsonSepartors</span> <span class="p">=</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="sc">'\"'</span><span class="p">,</span> <span class="sc">'['</span><span class="p">,</span> <span class="sc">']'</span><span class="p">,</span> <span class="sc">'{'</span><span class="p">,</span> <span class="sc">'}'</span><span class="p">,</span> <span class="sc">':'</span> <span class="p">}.</span><span class="n">ToList</span><span class="p">().</span><span class="n">AsReadOnly</span><span class="p">();</span>
+        <span class="k">private</span> <span class="k">static</span> <span class="n">ICollection</span><span class="p">&lt;</span><span class="kt">char</span><span class="p">&gt;</span> <span class="n">csvSperators</span> <span class="p">=</span> <span class="k">new</span><span class="p">[]</span>  <span class="p">{</span> <span class="sc">','</span><span class="p">,</span> <span class="sc">';'</span> <span class="p">}.</span><span class="n">ToList</span><span class="p">().</span><span class="n">AsReadOnly</span><span class="p">();</span>
+        <span class="k">public</span> <span class="k">static</span> <span class="n">ICollection</span><span class="p">&lt;</span><span class="kt">char</span><span class="p">&gt;</span> <span class="n">GetSeperators</span><span class="p">(</span><span class="n">ESperatorType</span> <span class="n">p_speratorType</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">ESperatorType</span><span class="p">.</span><span class="n">JSON</span> <span class="p">==</span> <span class="n">p_speratorType</span><span class="p">)</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">jsonSepartors</span><span class="p">);</span>
+            <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">ESperatorType</span><span class="p">.</span><span class="n">CSV</span> <span class="p">==</span> <span class="n">p_speratorType</span><span class="p">)</span>
+                <span class="k">return</span> <span class="p">(</span><span class="n">csvSperators</span><span class="p">);</span>
+            <span class="k">else</span>
+                <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">class</span> <span class="nc">Program</span>
+    <span class="p">{</span>
+        <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">foreach</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="k">in</span> <span class="n">Seprators</span><span class="p">.</span><span class="n">GetSeperators</span><span class="p">(</span><span class="n">ESperatorType</span><span class="p">.</span><span class="n">JSON</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">Seprators</span><span class="p">.</span><span class="n">GetSeperators</span><span class="p">(</span><span class="n">ESperatorType</span><span class="p">.</span><span class="n">JSON</span><span class="p">).</span><span class="n">Add</span><span class="p">(</span><span class="sc">'A'</span><span class="p">);</span>
+            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">();</span>
+            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"First element of jsonSepartors will now be 'A'"</span><span class="p">);</span>
+            <span class="k">foreach</span> <span class="p">(</span><span class="kt">char</span> <span class="n">c</span> <span class="k">in</span> <span class="n">Seprators</span><span class="p">.</span><span class="n">GetSeperators</span><span class="p">(</span><span class="n">ESperatorType</span><span class="p">.</span><span class="n">JSON</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">Console</span><span class="p">.</span><span class="n">Read</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+
+<p>For further information, please visit: </p>
+
+<ul>
+<li><a href="http://msdn.microsoft.com/en-us/library/k2604h5s(v=vs.90).aspx">Arrays usage</a></li>
+</ul><h2>
+<a name="collection" class="anchor" href="#collection"><span class="octicon octicon-link"></span></a>Collection</h2>
+
+<h3>
+<a name="collection-usage" class="anchor" href="#collection-usage"><span class="octicon octicon-link"></span></a>Collection Usage</h3>
 
 <h1>
 <a name="class-members" class="anchor" href="#class-members"><span class="octicon octicon-link"></span></a>Class Members</h1>
